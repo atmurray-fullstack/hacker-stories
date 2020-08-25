@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 
 const App = () => {
+  const [searchTerm, setSearchTerm] = React.useState('')
 
-  const list = [
+  const stories = [
     {
       title: 'React',
       url: 'https:..reactjs.org./',
@@ -24,19 +24,22 @@ const App = () => {
     }
   ]
 
-  const List = () => {
-    list.map(el => (
+  const List = props => {
+    return props.list.map(el => (
       <div key={el.objectID}>
         <span>
           <a href={el.url}>{el.title}</a>
         </span>
+        <span>{el.authors}</span>
+        <span>{el.num_comments}</span>
+        <span>{el.points}</span>
       </div>
     ))
-  }
+  };
 
   const handleChange = event => {
-    console.log(event.target.value)
-  }
+    setSearchTerm(event.target.value)
+  };
 
   return (
     <div>
@@ -48,7 +51,7 @@ const App = () => {
         Searching for <strong>{searchTerm}</strong>
       </p>
       <hr />
-
+      <List list={stories} />
     </div>
   )
 
